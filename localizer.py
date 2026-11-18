@@ -5,8 +5,19 @@ import os
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 def dump_text(jsonname):
     txt = {}
+    actualstr = ""
+    for i in range(len(jsonname)):
+        if jsonname[i] == ".":
+            break
+        actualstr += jsonname[i]
+    
+    if actualstr == "en":
+        reset_lang()
+        return
     jsonname = f"lang/{jsonname}"
     json_ex = Path(jsonname)
+    
+    
     if not json_ex.exists() or not json_ex.is_file():
         print(f"error, {jsonname} not found!")
         print("language switch failed")
@@ -27,14 +38,19 @@ def text_setloc(entxt,translkey):
             return f"missing text for key: \"{translkey}\""
 def switch_lang(jsonname):
     check = dump_text(jsonname)
-    if not check:
-        print("Error")
-        return
     actualstr = ""
     for i in range(len(jsonname)):
         if jsonname[i] == ".":
             break
         actualstr += jsonname[i]
+    
+    if actualstr == "en":
+        return
+    if not check:
+        print("Error")
+        return
+    
+    
     globalv.lang = actualstr
     
 def reset_lang():
