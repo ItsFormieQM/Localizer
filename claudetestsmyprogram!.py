@@ -1,5 +1,10 @@
+import sys
 import localizer
 import globalvars
+
+# Make sure Japanese prints correctly in terminals that default to another encoding.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 
 passed = 0
 failed = 0
@@ -62,8 +67,60 @@ check("unknown key is fine in English (key not needed)",
 print("\n[6] Missing language file")
 localizer.switch_lang("ja.json")
 localizer.switch_lang("nope.json")   # file does not exist
-# Desired behavior: a failed switch should not leave us in a broken state.
 check("failed switch keeps the previous language ('ja')", globalvars.lang, "ja")
+
+# --- 7. Dialogue: 20 lines, each checked in English, Bisaya and Japanese ---
+# The English text is what the game code passes in; the other languages come
+# from lang/bis.json and lang/ja.json.
+DIALOGUE = {
+    "test1": "You fool thoust!",
+    "test2": "You picked up the lorem ipsum from the ground.",
+    "test3": "You know. I used to hardcode my text before. But now that I started game dev. I've changed for the better. Hehehe",
+    "test4": "* A cold wind blows through the empty hall.",
+    "test5": "Welcome, traveler. You look tired.",
+    "test6": "Do you have the key to the old gate?",
+    "test7": "* You found a rusty key on the ground.",
+    "test8": "* Your HP was restored.",
+    "test9": "I'm not afraid of you!",
+    "test10": "Please, don't go into the forest alone.",
+    "test11": "* The shopkeeper smiles at you.",
+    "test12": "That will be 50 gold.",
+    "test13": "You don't have enough gold.",
+    "test14": "Thank you for your help. I won't forget this.",
+    "test15": "* The door is locked.",
+    "test16": "Look out behind you!",
+    "test17": "* You hear footsteps in the distance.",
+    "test18": "The path ahead is long. Take this with you.",
+    "test19": "Heh. Not bad for a beginner.",
+    "test20": "Goodbye, and good luck on your journey."
+}
+
+
+def lookup(lang_file, key, english):
+    """Switch language (or reset for English) and return the text for key."""
+    if lang_file is None:
+        localizer.reset_lang()
+    else:
+        localizer.switch_lang(lang_file)
+    return localizer.text_setloc(english, key)
+
+
+def dialogue_status(key, english):
+    """Return 'ok' if the key works in all three languages, else a description."""
+    if lookup(None, key, english) != english:
+        return "English did not return the passed-in text"
+    for lang_file in ("bis.json", "ja.json"):
+        text = lookup(lang_file, key, english)
+        if text.startswith("missing text"):
+            return f"{lang_file}: key is missing"
+        if not text.strip():
+            return f"{lang_file}: text is empty"
+    return "ok"
+
+
+print("\n[7] Dialogue lines (en / bis / ja)")
+for key, english in DIALOGUE.items():
+    check(f"{key} works in en, bis and ja", dialogue_status(key, english), "ok")
 
 # --- Summary ---------------------------------------------------------------
 print(f"\n{passed} passed, {failed} failed")
@@ -81,3 +138,12 @@ msg.append(localizer.text_setloc("So it stands, formerhyde", "test3"))
 for m in msg:
     print(m)
     print("")
+
+# --- Dialogue printout -----------------------------------------------------
+print("--- dialogue ---")
+for key, english in DIALOGUE.items():
+    print(f"{key}")
+    print(f"  en:  {lookup(None, key, english)}")
+    print(f"  bis: {lookup('bis.json', key, english)}")
+    print(f"  ja:  {lookup('ja.json', key, english)}")
+localizer.reset_lang()
