@@ -36,9 +36,9 @@ if True:
     try:
         os.chdir(os.path.dirname(os.path.abspath(__file__)))
         
-        os.system("git add .")
+        
         commit = input("Enter commit message: ")
-        os.system(f"git commit -m \"{commit}\"")
+        
         lognamefile = "logs/pushlogs/log.txt"
         check_txtlog = Path(f"{lognamefile}")
         if check_txtlog.is_file() and check_txtlog.exists():
@@ -56,6 +56,8 @@ if True:
                 file.writelines(f"TIME: {now} - Fail\n")
         
     finally:
+        os.system("git add .")
+        os.system(f"git commit -m \"{commit}\"")
         os.system("git push")
         print("\npushed successfully")
 
