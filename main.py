@@ -12,22 +12,22 @@ while True:
             self.pin = pin
         pass
     cmds = [
-        "Exit",
-        "Switch_Language",
-        "Clear",
+        text_function_setloc("Exit","ui_exit","Exit"),
+        text_function_setloc("Switch Language","ui_sellang","Switch_Language"),
+        text_function_setloc("Clear Terminal","ui_clear", "Clear_Terminal")
     ]
     if debug:
-        cmds.append("Push")
+        cmds.append(text_function_setloc("Push changes to GitHub","ui_debug_push","Push"))
     print(text_setloc("---Bank with OOP + translation---","intro_1"))
     def execute_ind(indnum):
         if indnum >= len(cmds) or indnum < 0:
             print("Command doesn't exist!\n")
             return
-        print(f"Selected {cmds[indnum]}")
-        eval(cmds[indnum] + "()")
+        print(f"Selected {cmds[indnum][0]}")
+        eval(cmds[indnum][2] + "()")
     print(text_setloc("---Command List---","cmdls_1"))
     for i in range(len(cmds)):
-        print(f"{i+1}. {cmds[i]}")
+        print(f"{i+1}. {cmds[i][0]}")
     
     ind = int(input(text_setloc("Enter your index: ","indexsel_1")))-1
     execute_ind(ind)

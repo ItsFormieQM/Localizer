@@ -6,5 +6,9 @@
     "indexsel_1":"Pagpili sa imong seleksyon: ",
     "langsel_1":"Pagpili ug lingwahi: ",
     "langsel_2":"Nailisdan ang lingwahi",
-    "cmdls_1":"Lista sa mga commando."
+    "cmdls_1":"Lista sa mga commando.",
+    "ui_exit":"Patyon ang programa",
+    "ui_sellang":"Ilis lingwahi",
+    "ui_clear":"Limpyohon ang Terminal",
+    "ui_debug_push":"I-push sa GitHub ang gi-himo"
 }
