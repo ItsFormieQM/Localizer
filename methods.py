@@ -20,5 +20,5 @@ def Switch_Language():
     print("2. Bisaya Cebuano")
     ind = int(input(text_setloc("Select language: ","langsel_1"))) -1
     switch_lang(__lang[ind])
-    print(text_setloc(f"Language set to {lang}","langsel_2"))
+    print(text_setloc(f"Language set to","langsel_2")+" "+lang)
     pass

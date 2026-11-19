@@ -69,7 +69,7 @@ def text_function_setloc(entxt,translkey,function):
     if globalv.lang == "en":
         return [entxt,entxt,function]
     else:
-        return [globalv.text[translkey],entxt,function]
+        return [text_setloc(entxt,translkey),entxt,function]
 
 if __name__ == "__main__":
     print("dont run this directly, just import")
