@@ -14,7 +14,7 @@ while True:
     cmds = [
         text_function_setloc("Exit","ui_exit","Exit"),
         text_function_setloc("Switch Language","ui_sellang","Switch_Language"),
-        text_function_setloc("Clear Terminal","ui_clear", "Clear_Terminal")
+        text_function_setloc("Clear Terminal","ui_clear", "Clear")
     ]
     if debug:
         cmds.append(text_function_setloc("Push changes to GitHub","ui_debug_push","Push"))
@@ -23,7 +23,7 @@ while True:
         if indnum >= len(cmds) or indnum < 0:
             print("Command doesn't exist!\n")
             return
-        print(f"Selected {cmds[indnum][0]}")
+        print(f"{text_setloc("Selected", "selected")} {cmds[indnum][0]}")
         eval(cmds[indnum][2] + "()")
     print(text_setloc("---Command List---","cmdls_1"))
     for i in range(len(cmds)):
