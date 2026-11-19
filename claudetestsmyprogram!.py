@@ -35,10 +35,19 @@ check("English returns the passed-in text", localizer.text_setloc(EN, "test3"), 
 print("\n[2] Switch to bis.json")
 localizer.switch_lang("bis.json")
 check("lang code is 'bis'", globalvars.lang, "bis")
-check("test1 comes from bis.json", localizer.text_setloc("x", "test1"), "You fool thoust!")
-check("test2 comes from bis.json", localizer.text_setloc("x", "test2"),
-      "gi kuha nimo ang lorem ipsum sa yuta.")
-check("English text is ignored when not 'en'", localizer.text_setloc(EN, "test3") != EN, True)
+check(
+    "test1 comes from bis.json", localizer.text_setloc("x", "test1"), "You fool thoust!"
+)
+check(
+    "test2 comes from bis.json",
+    localizer.text_setloc("x", "test2"),
+    "gi kuha nimo ang lorem ipsum sa yuta.",
+)
+check(
+    "English text is ignored when not 'en'",
+    localizer.text_setloc(EN, "test3") != EN,
+    True,
+)
 
 # --- 3. Switching to Japanese ----------------------------------------------
 print("\n[3] Switch to ja.json")
@@ -56,17 +65,22 @@ check("English text returned again", localizer.text_setloc(EN, "test3"), EN)
 # --- 5. Missing key --------------------------------------------------------
 print("\n[5] Missing key")
 localizer.switch_lang("bis.json")
-check("unknown key gives the 'missing text' message",
-      localizer.text_setloc("x", "doesnotexist"),
-      'missing text for key: "doesnotexist"')
+check(
+    "unknown key gives the 'missing text' message",
+    localizer.text_setloc("x", "doesnotexist"),
+    'missing text for key: "doesnotexist"',
+)
 localizer.reset_lang()
-check("unknown key is fine in English (key not needed)",
-      localizer.text_setloc("hello", "doesnotexist"), "hello")
+check(
+    "unknown key is fine in English (key not needed)",
+    localizer.text_setloc("hello", "doesnotexist"),
+    "hello",
+)
 
 # --- 6. Missing language file ----------------------------------------------
 print("\n[6] Missing language file")
 localizer.switch_lang("ja.json")
-localizer.switch_lang("nope.json")   # file does not exist
+localizer.switch_lang("nope.json")  # file does not exist
 check("failed switch keeps the previous language ('ja')", globalvars.lang, "ja")
 
 # --- 7. Dialogue: 20 lines, each checked in English, Bisaya and Japanese ---
@@ -92,7 +106,7 @@ DIALOGUE = {
     "test17": "* You hear footsteps in the distance.",
     "test18": "The path ahead is long. Take this with you.",
     "test19": "Heh. Not bad for a beginner.",
-    "test20": "Goodbye, and good luck on your journey."
+    "test20": "Goodbye, and good luck on your journey.",
 }
 
 
@@ -129,10 +143,12 @@ print(f"\n{passed} passed, {failed} failed")
 print("\n--- demo ---")
 localizer.switch_lang("bis.json")
 msg = []
-msg.append(localizer.text_setloc(
-    "You know. I used to hardcode my text before. But now that I started game dev. I've changed for the better. Hehehe",
-    "test3"
-))
+msg.append(
+    localizer.text_setloc(
+        "You know. I used to hardcode my text before. But now that I started game dev. I've changed for the better. Hehehe",
+        "test3",
+    )
+)
 localizer.reset_lang()
 msg.append(localizer.text_setloc("So it stands, formerhyde", "test3"))
 for m in msg:
