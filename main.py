@@ -1,8 +1,15 @@
-import localizer
-from math_ext import clamp
-localizer.switch_lang("bis.json")
+from localizer import *
+from ext import clamp
+from globalvars import *
+from methods import *
+switch_lang("bis.json")
 msg = []
-
+class Account:
+    def __init__(self,name,age,pin):
+        self.name = name
+        self.age = age
+        self.pin = pin
+    pass
 langs = [
     "en.json",
     "ja.json",
@@ -11,16 +18,12 @@ langs = [
 print("---Languages---")
 for i in range(len(langs)):
     print(f"{i}. {langs[i]}")
-ind = int(input("Enter index: "))
+ind = clamp(int(input("Enter index: ")),0,len(langs)-1)
+switch_lang(langs[ind])
+msg.append(text_setloc(
+    "GTA 6 RELEASED GUYS HOLY SHIT",
+    "test2"
+))
 
-localizer.switch_lang(langs[clamp(ind,0,len(langs)-1)])
-msg.append(localizer.text_setloc(
-    "You know. I used to hardcode my text before. But now that I started game dev. I've changed for the better. Hehehe",
-    "test3"
-))
-msg.append(localizer.text_setloc(
-    "I'm not scared of you!",
-    "test9"
-))
 for i in msg:
-    print(i, end="\n")
+    print(f"\n{i}")

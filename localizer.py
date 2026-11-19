@@ -45,6 +45,7 @@ def switch_lang(jsonname):
         actualstr += jsonname[i]
     
     if actualstr == "en":
+        print(f"Error, json file {jsonname} does not exist in the lang directory and language wasn't set!")
         return
     if not check:
         print("Error")
@@ -58,4 +59,4 @@ def reset_lang():
 if __name__ == "__main__":
     print("dont run this directly, just import")
     print("pls run main.py instead")
-    raise TypeError
+    raise TypeError("pls run main.py instead")
