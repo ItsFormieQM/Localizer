@@ -35,7 +35,7 @@ def text_setloc(entxt,translkey):
         try:
             return globalv.text[translkey]
         except KeyError:
-            return f"missing text for key: \"{translkey}\""
+            return f"missing text for key: \"{translkey}\" on language {globalv.lang}"
 def switch_lang(jsonname):
     check = dump_text(jsonname)
     actualstr = ""
