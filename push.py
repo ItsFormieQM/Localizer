@@ -48,7 +48,7 @@ if True:
             with open(lognamefile,"w") as file:
                 file.writelines(f"TIME: {now} - Success\n")
     except Exception:
-        if check_txtlog.is_file():
+        if check_txtlog.is_file() and check_txtlog.exists():
             with open(lognamefile,"a") as file:
                 file.writelines(f"TIME: {now} - Fail\n")
         else:
