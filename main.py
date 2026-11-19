@@ -16,7 +16,8 @@ while True:
         "Switch_Language",
         "Clear",
     ]
-    cmds.append("Push")
+    if debug:
+        cmds.append("Push")
     print(text_setloc("---Bank with OOP + translation---","intro_1"))
     def execute_ind(indnum):
         if indnum >= len(cmds) or indnum < 0:
