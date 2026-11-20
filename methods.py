@@ -1,6 +1,9 @@
 from os import system
 from localizer import *
 from globalvars import *
+if __name__ == "__main__":
+    print("pls dont run")
+    raise TypeError("run main.py instead")
 def account_creator():
     pass
 def Exit():
@@ -8,6 +11,7 @@ def Exit():
     exit()
 def Clear():
     system("clear")
+    system("cls")
 def Push():
     os.system("python push_auto.py")
     exit()
