@@ -66,10 +66,7 @@ def reset_lang():
     globalv.lang = "en"
     globalv.text = {}
 def text_function_setloc(entxt,translkey,function):
-    if globalv.lang == "en":
-        return [entxt,entxt,function]
-    else:
-        return [text_setloc(entxt,translkey),entxt,function]
+    return [text_setloc(entxt,translkey),entxt,function]
 
 if __name__ == "__main__":
     print("dont run this directly, just import")
