@@ -65,7 +65,7 @@ def switch_lang(jsonname):
 def reset_lang():
     globalv.lang = "en"
     globalv.text = {}
-def text_function_setloc(entxt,translkey,function):
+def text_logic_setloc(entxt,translkey,function):
     return [text_setloc(entxt,translkey),entxt,function]
 
 if __name__ == "__main__":
